@@ -4,13 +4,13 @@ class Location {
   double lat;
   Future <void> getLocation() async {
     try {
-      // LocationPermission permission = await Geolocator.checkPermission();
-      // LocationPermission permissio = await Geolocator.requestPermission();
 
-      Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
+
+      Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
       print(position);
       lon = position.longitude;
       lat= position.latitude;
+
       print(lon);
       print(lat);
     }catch (e) {
