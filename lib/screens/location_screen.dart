@@ -28,9 +28,9 @@ class _LocationScreenState extends State<LocationScreen> {
 
   void updateUI(dynamic weatherData) {
     setState(() {
-      if (weatherData == null){
-        temperature=0;
-        weatherIcon= 'Error';
+      if (weatherData == null) {
+        temperature = 0;
+        weatherIcon = 'Error';
         weatherMSG = 'unable to get weather data';
         city = '';
         return;
@@ -39,7 +39,7 @@ class _LocationScreenState extends State<LocationScreen> {
       temp = weatherData['main']['temp'];
       city = weatherData['name'];
       temperature = temp.toInt();
-      weatherIcon =  weathermod.getWeatherIcon(condition);
+      weatherIcon = weathermod.getWeatherIcon(condition);
       weatherMSG = weathermod.getMessage(temperature);
     });
   }
@@ -66,8 +66,9 @@ class _LocationScreenState extends State<LocationScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   TextButton(
-                    onPressed: () async{
-                      var weatherData=await WeatherModel().getLocationWeather();
+                    onPressed: () async {
+                      var weatherData =
+                          await WeatherModel().getLocationWeather();
                       updateUI(weatherData);
                     },
                     child: Icon(
@@ -76,11 +77,15 @@ class _LocationScreenState extends State<LocationScreen> {
                     ),
                   ),
                   TextButton(
-                    onPressed: () {
-                      Navigator.push(context,
+                    onPressed: () async {
+                      var typed = await Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
                         return CityScreen();
                       }));
+                      if (typed!= null){
+                        var searchData = await weathermod.serachweather(typed);
+                        updateUI(searchData);
+                      }
                     },
                     child: Icon(
                       Icons.location_city,

@@ -7,6 +7,7 @@ class CityScreen extends StatefulWidget {
 }
 
 class _CityScreenState extends State<CityScreen> {
+  String cityname;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,32 +36,34 @@ class _CityScreenState extends State<CityScreen> {
               ),
               Container(
                 padding: EdgeInsets.all(20.0),
-                child:TextField(
+                child: TextField(
                   style: TextStyle(
                     color: Colors.white,
-
                   ),
-                    onChanged: (value){
-                    print(value);
-                    },
-                    decoration: InputDecoration(
-                      hintText: 'Enter a city name',
-                      filled: true,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10),
-                        ),borderSide: BorderSide.none,
+                  onChanged: (value) {
+                    cityname = value;
+                  },
+                  decoration: InputDecoration(
+                    hintText: 'Enter a city name',
+                    filled: true,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
                       ),
-                      icon: Icon(Icons.location_city,color: Colors.white,),
-                      hintStyle: TextStyle(color: Colors.white),
-
+                      borderSide: BorderSide.none,
                     ),
-              ),
-
-
-
+                    icon: Icon(
+                      Icons.location_city,
+                      color: Colors.white,
+                    ),
+                    hintStyle: TextStyle(color: Colors.white),
+                  ),
+                ),
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pop(context,cityname);
+                },
                 child: Text(
                   'Get Weather',
                   style: kButtonTextStyle,
